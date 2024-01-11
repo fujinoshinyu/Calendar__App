@@ -7,13 +7,18 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
       </head>
       <body>
-          <h1>Blog Name</h1>
+          <x-app-layout>
+            <x-slot name="header">
+          {{ Auth::user()->name }}          
+            </x-slot>
+          
         <a href='/posts/create'>create</a>
           <div class='posts'>
             @foreach ($posts as $post) <div class='post'>
             <h2 class='title'>
                 <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
             </h2>
+            <a href="">{{ $post->category->name }}</a>
             <p class='body'>{{ $post->body }}</p> 
             <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
                 @csrf
@@ -24,6 +29,7 @@
             
               @endforeach
           </div>
+          
 <div class='paginate'>
 {{ $posts->links() }}
           </div>
@@ -35,5 +41,6 @@ if (confirm('削除すると復元できません。\n本当に削除します�
 }
 }
 </script>
+</x-app-layout>
       </body>
 </html>
