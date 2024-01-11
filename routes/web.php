@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\EventController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,4 +40,13 @@ Route::delete('/posts/{post}', 'delete')->name('delete');
 Route::get('/posts/{post}/edit', 'edit')->name('edit');
 });
 
+
+//calendar
+Route::middleware('auth')->group(function () {
+Route::get('/calendar', [EventController::class, 'show'])->name("show");
+Route::post('/calendar/create', [EventController::class, 'create'])->name("create");
+Route::post('/calendar/get',  [EventController::class, 'get'])->name("get"); //DBに登録した予定を取得
+Route::put('/calendar/update', [EventController::class, 'update'])->name("update"); // 予定の更新
+Route::delete('/calendar/delete', [EventController::class, 'delete'])->name("delete");
+});
 require __DIR__.'/auth.php';
