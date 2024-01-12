@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\DmController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,11 +44,21 @@ Route::get('/posts/{post}/edit', 'edit')->name('edit');
 
 
 //calendar
-Route::middleware('auth')->group(function () {
-Route::get('/calendar', [EventController::class, 'show'])->name("show");
-Route::post('/calendar/create', [EventController::class, 'create'])->name("create");
-Route::post('/calendar/get',  [EventController::class, 'get'])->name("get"); //DBに登録した予定を取得
-Route::put('/calendar/update', [EventController::class, 'update'])->name("update"); // 予定の更新
-Route::delete('/calendar/delete', [EventController::class, 'delete'])->name("delete");
+Route::controller(EventController::class)->middleware(['auth'])->group(function(){ Route::get('/show');
+Route::get('/calendar', 'show')->name("show");
+Route::post('/calendar/create', 'create')->name("create");
+Route::post('/calendar/get', 'get')->name("get"); //DBに登録した予定を取得
+Route::put('/calendar/update', 'update')->name("update"); // 予定の更新
+Route::delete('/calendar/delete', 'delete')->name("delete");
 });
+
+//dm
+Route::controller(DmController::class)->middleware(['auth'])->group(function(){ Route::get('/dm');
+Route::get('/dm', 'dm')->name("dm");
+Route::post('/add', 'add')->name("add");
+Route::get('/result/ajax', 'getData')->name("getData");
+
+});
+
+Route::get('/categories/{category}', [CategoryController::class,'index']);
 require __DIR__.'/auth.php';
