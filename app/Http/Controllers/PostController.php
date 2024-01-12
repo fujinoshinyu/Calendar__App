@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
 
-
 class PostController extends Controller
 {
     public function index(Post $post) {
@@ -16,11 +15,12 @@ return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);  //g
 public function show(Post $post) {
 return view('posts/show')->with(['post' => $post]); //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
 }
-public function create(Category $category)
-{
+//追加
+public function create(Category $category) {
 return view('posts/create')->with(['categories' => $category->get()]); 
     
 }
+
 public function store(Post $post, PostRequest $request) 
 {
 $input = $request['post']; $post->fill($input)->save();

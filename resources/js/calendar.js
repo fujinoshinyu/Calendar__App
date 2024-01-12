@@ -27,7 +27,7 @@ if (calendarEl !== null) {
         initialView: "dayGridMonth",
         customButtons: { // カスタムボタン
         eventAddButton: { // 新規予定追加ボタン
-            text: '予定を追加',
+            text: 'Add Event',
             click: function() {
                 // 初期化（以前入力した値をクリアする）
                 document.getElementById("new-id").value = "";

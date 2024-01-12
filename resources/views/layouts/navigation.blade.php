@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('show')" :active="request()->routeIs('show')">
                         {{ __('CREATE CALENDAR') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('dm')" :active="request()->routeIs('dm')">
+                        {{ __('CHAT (asynchronous)') }}
+                    </x-nav-link>
                 </div>
             </div>
 

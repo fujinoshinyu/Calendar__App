@@ -11,11 +11,15 @@
     <body>
         <x-app-layout>
             <x-slot name="header">
-          {{ Auth::user()->name }}          
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    Hi , {{ Auth::user()->name }}  Fill Out Event!!
+                </h2>
             </x-slot>
         <!-- 以下のdivタグ内にカレンダーを表示 -->
         <div id='calendar'></div>
-        
+        <x-primary-button class="ml-3">
+                <a href='/'>{{ __('DONE') }}</a>
+            </x-primary-button>
         <!-- カレンダー新規追加モーダル -->
         <div id="modal-add" class="modal">
             <div class="modal-contents">
@@ -97,7 +101,7 @@
 /* モーダル */
 .modal-contents{
     background-color: white;
-    height: 400px;
+    height: 425px;
     width: 600px;
     padding: 20px;
 }
